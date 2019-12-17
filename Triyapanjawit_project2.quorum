@@ -1,0 +1,134 @@
+use Libraries.Compute.Random            // library to compute random number
+
+action Main                             // main function
+output "Rules:"
+output "Scissors cut paper"
+output "Paper covers rock"
+output "Rock crushes lizard"
+output "Lizard poisons Spock"
+output "Spock smashes scissors"
+output "Scissors decapitate lizard"
+output "Lizard eats paper"
+output "Paper disproves Spock"
+output "Spock vaporizes rock"
+output "Rock crushes scissors"
+output " "
+
+integer userChoice = GetInput()         // call function GetInput
+integer comChoice = GetComAns()         // call function getComAns
+GenResult(userChoice, comChoice)        // call function GenResult
+
+end
+
+action GetInput returns integer         // this function asks user for input
+text choice = input("enter your selection from 1-5, 1=rock, 2=paper, 3=scissors, 4=lizard, 5=Spock: ")
+integer choiceInput = cast(integer, choice) // convert text into integer
+if choiceInput > 5                      // validate input
+    alert("choice invalid")             // if error, alert the user
+elseif choiceInput < 1                  // validate input
+    alert("choice invalid")             // if error, alert the user
+end
+return choiceInput                      // return input
+end
+
+action GetComAns returns integer        // get random computer choice
+Random random                           // random variable
+integer comAns = random:RandomIntegerBetween(1, 5)  // get random number between 1 to 5
+return comAns
+end
+
+action GenResult(integer a, integer b)  // this function generate result
+integer uChoice = a                     // user choice
+integer cChoice = b                     // computer choice
+if uChoice = 1                          // calculate result
+    output "You chose rock"
+    if cChoice = 1                      
+        output "Opponent chose rock"
+        output "Draw"
+    elseif cChoice = 2
+        output "Opponent chose paper"
+        output "Paper covers rock: you lost"
+    elseif cChoice = 3
+        output "Opponent chose scissors"
+        output "Rock crushes scissors: you won"
+    elseif cChoice = 4
+        output "Opponent chose lizard"
+        output "Rock crushes lizard: you won"
+    else
+        output "Opponent chose Spock"
+        output "Spock vaporizes rock: you lost"
+    end
+elseif uChoice = 2
+    output "You chose paper"
+    if cChoice = 1
+        output "Opponent chose rock"
+        output "Paper covers rock: you won"
+    elseif cChoice = 2
+        output "Opponent chose paper"
+        output "Draw"
+    elseif cChoice = 3
+        output "Opponent chose scissors"
+        output "Scissors cut paper: you lost"
+    elseif cChoice = 4
+        output "Opponent chose lizard"
+        output "Lizard eats paper: you lost"
+    else
+        output "Opponent chose Spock"
+        output "Paper disproves Spock: you won"
+    end
+elseif uChoice = 3
+    output "You chose scissors"
+    if cChoice = 1
+        output "Opponent chose rock"
+        output "Rock crushes scissors: you lost"
+    elseif cChoice = 2
+        output "Opponent chose paper"
+        output "Scissors cut paper: you won"
+    elseif cChoice = 3
+        output "Opponent chose scissors"
+        output "Draw"
+    elseif cChoice = 4
+        output "Opponent chose lizard"
+        output "Scissors decapitates lizard: you won"
+    else
+        output "Opponent chose Spock"
+        output "Spock smashes scissors: you lost"
+    end
+elseif uChoice = 4
+    output "You chose lizard"
+    if cChoice = 1
+        output "Opponent chose rock"
+        output "Rock crushes lizard: you lost"
+    elseif cChoice = 2
+        output "Opponent chose paper"
+        output "Lizard eats paper: you won"
+    elseif cChoice = 3
+        output "Opponent chose scissors"
+        output "Scissors decapitates lizard: you lost"
+    elseif cChoice = 4
+        output "Opponent chose lizard"
+        output "Draw"
+    else
+        output "Opponent chose Spock"
+        output "Lizard poisons Spock: you won"
+    end
+else
+    output "You chose Spock"
+    if cChoice = 1
+        output "Opponent chose rock"
+        output "Spock vaporizes rock: you won"
+    elseif cChoice = 2
+        output "Opponent chose paper"
+        output "Paper disproves Spock: you lost"
+    elseif cChoice = 3
+        output "Opponent chose scissors"
+        output "Spock smashes scissors: you won"
+    elseif cChoice = 4
+        output "Opponent chose lizard"
+        output "Lizard poisons Spock: you lost"
+    else 
+        output "Opponent chose Spock"
+        output "draw"
+    end
+end
+end
